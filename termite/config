@@ -66,9 +66,9 @@ background          = rgba(27, 43, 52)
 color0  = #1B2B34
 color8  = #65737E
 
-# Oranges
+# Oranges (dark over light)
 color15  = #FFB347
-color7 = #FF9806
+color7   = #FF9806
 
 # Red
 color1  = #EC5f67
