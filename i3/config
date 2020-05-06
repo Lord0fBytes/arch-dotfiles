@@ -178,7 +178,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
-	colors {
+		colors {
            background #222222
            statusline #47DFFF
            separator #FFB347
@@ -189,3 +189,57 @@ bar {
            urgent_workspace   #2f343a #900000 #ffffff
         }
 }
+
+#############################
+### settings for i3-gaps: ###
+#############################
+
+# inner/outer gaps #
+gaps inner 5
+gaps outer 0
+
+# Smart gaps #
+smart_gaps on
+smart_borders on
+
+# No Title Bar #
+for_window [class="^.*"] border pixel 1
+new_window 1pixel
+
+# Gaps-Mode #
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
+set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
+bindsym $mod+Shift+g mode "$mode_gaps"
+
+mode "$mode_gaps" {
+        bindsym o      mode "$mode_gaps_outer"
+        bindsym i      mode "$mode_gaps_inner"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_inner" {
+        bindsym plus  gaps inner current plus 5
+        bindsym minus gaps inner current minus 5
+        bindsym 0     gaps inner current set 0
+        bindsym Shift+plus  gaps inner all plus 5
+        bindsym Shift+minus gaps inner all minus 5
+        bindsym Shift+0     gaps inner all set 0
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+mode "$mode_gaps_outer" {
+        bindsym plus  gaps outer current plus 5
+        bindsym minus gaps outer current minus 5
+        bindsym 0     gaps outer current set 0
+        bindsym Shift+plus  gaps outer all plus 5
+        bindsym Shift+minus gaps outer all minus 5
+        bindsym Shift+0     gaps outer all set 0
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# POLYBAR #
+# Future startup for polybar
+#exec --no-startup-id ~/.config/polybar/launch.sh
+
