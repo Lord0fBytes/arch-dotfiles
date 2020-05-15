@@ -24,16 +24,21 @@ background-alt = #444
 foreground = #dfdfdf
 foreground-alt = #555
 primary = #ffb52a
-secondary = #e60053
+secondary = #EC5f67
 alert = #bd2c40
+priOrange = #ffb52a
+secGreen = #99C794
+triBlue = #2A8296
 
+
+;;;;;;;;;;;;;;;;;;;;; TOP ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [bar/mybar]
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
 height = 27
 ;offset-x = 1%
 ;offset-y = 1%
-radius = 6.0
+;radius = 6.0
 fixed-center = false
 
 background = ${colors.background}
@@ -42,8 +47,8 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = #f00
 
-border-size = 4
-border-color = #00000000
+; border-size = 4
+; border-color = #00000000
 
 padding-left = 0
 padding-right = 2
@@ -51,13 +56,18 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = fixed:pixelsize=10;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+; font-0 = fixed:pixelsize=10;1
+font-0 = "DejaVu Sans Mono:style=bold:size=12;2"
+font-1 = unifont:fontformat=truetype:size=18:antialias=false;0
 font-2 = siji:pixelsize=10;1
+font-3 = "Font Awesome 5 Free:style=Solid:pixelsize=13;3"
+font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=13;3"
+font-5 = "Font Awesome 5 Brands:pixelsize=11;3"
+font-6 = "DejaVu Sans Mono:style=Bold:size16;2"
 
 modules-left = i3
 modules-center = date
-modules-right = filesystem memory cpu eth temperature powermenu
+modules-right = powermenu
 
 tray-position = right
 tray-padding = 2
@@ -77,6 +87,53 @@ tray-padding = 2
 cursor-click = pointer
 cursor-scroll = ns-resize
 
+;;;;;;;;;;;;;;;;;;;;;; BOTTOM ;;;;;;;;;;;;;;;;;;;;
+[bar/bottomBar]
+;monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 27
+;offset-x = 1%
+;offset-y = 1%
+; radius = 6.0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+line-color = #f00
+
+; border-size = 4
+; border-color = #000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+; font-0 = fixed:pixelsize=10;1
+font-0 = "DejaVu Sans Mono:style=bold:size=12;2"
+font-1 = unifont:fontformat=truetype:size=18:antialias=false;0
+font-2 = siji:pixelsize=10;1
+font-3 = "Font Awesome 5 Free:style=Solid:pixelsize=11;3"
+font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=11;3"
+font-5 = "Font Awesome 5 Brands:pixelsize=11;3"
+font-6 = "DejaVu Sans Mono:style=Bold:size16;2"
+
+modules-left = 
+modules-center = 
+modules-right = filesystem memory cpu eth 
+
+tray-position = right
+tray-padding = 2
+;tray-background = #0063ff
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+bottom = true
+
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:30:...%
@@ -87,7 +144,8 @@ interval = 25
 
 mount-0 = /
 
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-mounted =  %percentage_used%%
+label-mounted-foreground = ${colors.priOrange}
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
@@ -100,28 +158,43 @@ wrapping-scroll = false
 ; Only show workspaces on the same output as the bar
 ;pin-workspaces = true
 
+; Home
+ws-icon-0 = 1;
+; Terminal
+ws-icon-1 = 2;
+; Firefox
+ws-icon-2 = 3;
+; Spotify
+ws-icon-3 = 4;
+; Sublime
+ws-icon-4 = 5;
+; Discord
+ws-icon-5 = 6;
+
 label-mode-padding = 2
 label-mode-foreground = #000
 label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
-label-focused = %index%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
+label-focused = %icon%
+label-focused-foreground = ${colors.secGreen}
+label-focused-background = 
+label-focused-underline= ${colors.secGreen}
 label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
-label-unfocused = %index%
+label-unfocused = %icon%
 label-unfocused-padding = 2
+label-unfocused-foreground = ${colors.priOrange}
 
 ; visible = Active workspace on unfocused monitor
-label-visible = %index%
+label-visible = %icon%
 label-visible-background = ${self.label-focused-background}
 label-visible-underline = ${self.label-focused-underline}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
-label-urgent = %index%
+label-urgent = %icon%
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
 
@@ -131,28 +204,32 @@ label-urgent-padding = 2
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #f90000
+format-prefix = " "
+format-prefix-foreground = ${colors.priOrange}
+format-underline = 
 label = %percentage:2%%
+label-foreground = ${colors.priOrange}
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #4bffdc
+format-prefix = " "
+format-prefix-foreground = ${colors.priOrange}
+format-underline = 
 label = %percentage_used%%
+label-foreground = ${colors.priOrange}
 
 [module/eth]
 type = internal/network
 interface = eth0
 interval = 3.0
 
-format-connected-underline = #55aa55
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
+format-connected-underline = 
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.priOrange}
+; 
 label-connected = %local_ip%
+label-connected-foreground = ${colors.priOrange}
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
@@ -164,17 +241,18 @@ format-disconnected =
 type = internal/date
 interval = 5
 
-date = "%a %d @"
+date = "  %a %d @"
 date-alt = " %Y-%m-%d"
 
 time = %H:%M
 time-alt = %H:%M
 
-format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #0a6cf5
+format-prefix =  
+format-prefix-foreground = ${colors.triBlue}
+format-underline = 
 
 label = %date% %time%
+label-foreground = ${colors.triBlue}
 
 [module/pulseaudio]
 type = internal/pulseaudio
@@ -257,7 +335,7 @@ expand-right = true
 
 format-spacing = 1
 
-label-open = 
+label-open = 
 label-open-foreground = ${colors.secondary}
 label-close =  cancel
 label-close-foreground = ${colors.secondary}
