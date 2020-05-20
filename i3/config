@@ -182,6 +182,9 @@ bindsym $mod+r mode "resize"
 
 
 # POLYBAR #
-# Future startup for polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
+
+# Adjust Screen Layout #
+# Adusts the screens based on docked/not docked
+# exec_always --no-startup-id ~/.screenlayout/autoadjust.sh
 
