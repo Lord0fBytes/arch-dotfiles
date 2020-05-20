@@ -123,7 +123,7 @@ font-6 = "DejaVu Sans Mono:style=Bold:size16;2"
 
 modules-left = temperature
 modules-center = eth wlan
-modules-right = filesystem memory cpu 
+modules-right = filesystem memory cpu batt
 
 tray-position = right
 tray-padding = 2
@@ -200,6 +200,43 @@ label-urgent-padding = 2
 
 ; Separator in between workspaces
 ; label-separator = |
+
+[module/batt]
+type = internal/battery
+
+; This is useful in case the battery never reports 100% charge
+full-at = 99
+
+; Use the following command to list batteries and adapters:
+; $ ls -1 /sys/class/power_supply/
+battery = BAT1
+adapter = ADP1
+
+poll-interval = 5
+
+format-charging =  <label-charging>
+format-charging-foreground=${colors.priOrange}
+format-discharging = <animation-discharging> <label-discharging>
+format-discharging-foreground=${colors.secondary}
+format-full = <label-full>
+format-full-foreground=${colors.secGreen}
+
+; Available tokens:
+;   %percentage% (default) - is set to 100 if full-at is reached
+;   %percentage_raw%
+;   %time%
+;   %consumption% (shows current charge rate in watts)
+label-charging =  %percentage%%
+label-discharging = %percentage%%
+label-full =  Full
+
+animation-discharging-0 = 
+animation-discharging-1 = 
+animation-discharging-2 = 
+animation-discharging-3 = 
+animation-discharging-4 = 
+; Framerate in milliseconds
+animation-discharging-framerate = 500
 
 [module/cpu]
 type = internal/cpu
