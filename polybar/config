@@ -121,9 +121,9 @@ font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=11;3"
 font-5 = "Font Awesome 5 Brands:pixelsize=11;3"
 font-6 = "DejaVu Sans Mono:style=Bold:size16;2"
 
-modules-left = 
-modules-center = 
-modules-right = filesystem memory cpu eth 
+modules-left = temperature
+modules-center = eth wlan
+modules-right = filesystem memory cpu 
 
 tray-position = right
 tray-padding = 2
@@ -221,7 +221,7 @@ label-foreground = ${colors.priOrange}
 
 [module/eth]
 type = internal/network
-interface = eth0
+interface = enp0s20f0u2u2
 interval = 3.0
 
 format-connected-underline = 
@@ -236,6 +236,23 @@ format-disconnected =
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/wlan]
+type = internal/network
+interface = wlp2s0
+interval = 3.0
+
+format-connected-underline = 
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.priOrange}
+
+label-connected = %local_ip%
+label-connected-foreground = ${colors.priOrange}
+
+format-disconnected = <label-disconnected>
+format-disconnected-underline = 
+label-disconnected =  off
+label-disconnected-foreground = ${colors.foreground-alt}
 
 [module/date]
 type = internal/date
@@ -314,12 +331,13 @@ type = internal/temperature
 thermal-zone = 0
 warn-temperature = 60
 
-format = <ramp> <label>
-format-underline = #f50a4d
+format = <label>
+format-underline =
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
 
-label = %temperature-c%
+label =  %temperature-c%
+label-foreground=${colors.priOrange}
 label-warn = %temperature-c%
 label-warn-foreground = ${colors.secondary}
 
